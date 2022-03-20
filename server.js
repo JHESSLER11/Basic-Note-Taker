@@ -33,7 +33,7 @@ app.get('/api/notes', (req, res) => {
 })
 console.log(notesDb)
 // adds notes to json file
-app.post('/api/notes', (req, res) => {
+app.post("/api/notes", (req, res) => {
     // console.log(notesDb)
     // //notesDb = JSON.parse(notesDb);
 
@@ -62,9 +62,9 @@ app.post('/api/notes', (req, res) => {
         return notesDb;
     })
     console.log(notesDb)
-    
+
     //writes database 
-    writeToFile(notesDb);
+    writeToDataBase(notesDb);
 
     res.json(saveNote);
 
@@ -75,8 +75,8 @@ app.listen(PORT, () => {
     console.log(`API server now on ${PORT}!`)
 })
 
-//write to file function 
-const writeToFile = (notesDb) => {
+//write to database function 
+const writeToDataBase = (notesDb) => {
     notesDb = JSON.stringify(notesDb)
     fs.writeFile('./db/db.json', notesDb, error => {
         if (error) {
