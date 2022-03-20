@@ -29,26 +29,44 @@ app.get('*', (req, res) => {
 
 // get notes
 app.get('/api/notes', (req, res) => {
-    res.json(notesDb)
+    res.json(notesDb);
 })
 console.log(notesDb)
 // adds notes to json file
 app.post('/api/notes', (req, res) => {
-    console.log(notesDb)
-    //notesDb = JSON.parse(notesDb);
+    // console.log(notesDb)
+    // //notesDb = JSON.parse(notesDb);
 
-    // adds id number
-    req.body.id = JSON.stringify(notesDb[notesDb.length -1].id + 1);
+    // // adds id number
+    // req.body.id = notesDb[notesDb.length -1].id + 1;
 
-    notesDb.push(req.body);
+    // notesDb.push(req.body);
     
+    // console.log(notesDb)
+    
+    
+    // //notesDb = JSON.stringify(notesDb);
+    // writeToFile(notesDb);
+    // console.log(notesDb)
+
+    // res.json(req.body);
+    let saveNote = req.body;
+    
+    notesDb.push(saveNote);
+
+    // adds id number to each note
+    let number = 1
+    notesDb.forEach((note) => {
+        note.id = number;
+        number++;
+        return notesDb;
+    })
     console.log(notesDb)
     
-    
-    //notesDb = JSON.stringify(notesDb);
+    //writes database 
     writeToFile(notesDb);
 
-    res.json(req.body)
+    res.json(saveNote);
 
 })
 
@@ -57,9 +75,10 @@ app.listen(PORT, () => {
     console.log(`API server now on ${PORT}!`)
 })
 
-// write to file function 
+//write to file function 
 const writeToFile = (notesDb) => {
-    fs.writeFile('./db/db.json', notesDb = JSON.stringify(notesDb), error => {
+    notesDb = JSON.stringify(notesDb)
+    fs.writeFile('./db/db.json', notesDb, error => {
         if (error) {
             return console.log(error);
         } else {
