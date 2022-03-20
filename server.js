@@ -1,21 +1,24 @@
-const fs = require('fs');
 const express = require('express');
+const fs = require('fs');
 const app = express();
 const path = require('path');
-const notesDb = require("./db/db.json")
+const notesDb = require("./db/db.json");
+const PORT = process.env.PORT || 3001;
 
 console.log(notesDb)
 
-const PORT = process.env.PORT || 3001;
 
 // handles post request 
 app.use(express.json());
-app.use(express.urlencoded( {
-    extended: true 
-}));
+app.use(express.urlencoded( { extended: true }));
 
 // handles in coming js,css, and images
 app.use(express.static('public'));
+
+// get index.html file
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'))
+});
 
 // get notes.html file
 app.get('/notes', (req, res) => {
@@ -34,22 +37,7 @@ app.get('/api/notes', (req, res) => {
 console.log(notesDb)
 // adds notes to json file
 app.post("/api/notes", (req, res) => {
-    // console.log(notesDb)
-    // //notesDb = JSON.parse(notesDb);
-
-    // // adds id number
-    // req.body.id = notesDb[notesDb.length -1].id + 1;
-
-    // notesDb.push(req.body);
     
-    // console.log(notesDb)
-    
-    
-    // //notesDb = JSON.stringify(notesDb);
-    // writeToFile(notesDb);
-    // console.log(notesDb)
-
-    // res.json(req.body);
     let saveNote = req.body;
     
     notesDb.push(saveNote);
@@ -64,7 +52,7 @@ app.post("/api/notes", (req, res) => {
     console.log(notesDb)
 
     //writes database 
-    writeToDataBase(notesDb);
+    writeToDataBase();
 
     res.json(saveNote);
 
