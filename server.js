@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express()
 const path = require('path');
-const db = require('./db/db.json')
+//const db = require('./db/db.json')
 
 
 const PORT = process.env.PORT || 3001;
@@ -15,15 +15,21 @@ app.use(express.urlencoded( {
 // handles in coming js,css, and images
 app.use(express.static('public'));
 
+// get notes.html file
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/notes.html'))
+});
+
 // get index.html file
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'))
 });
 
-// get notes.html
-app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'))
-});
+
+app.post('/api/notes', (req, res) => {
+    let results = notes;
+    res.json(results);
+})
 
 // runs the server
 app.listen(PORT, () => {
