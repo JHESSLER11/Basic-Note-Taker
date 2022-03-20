@@ -33,7 +33,7 @@ app.get('*', (req, res) => {
 // get notes
 app.get('/api/notes', (req, res) => {
     res.json(notesDb);
-})
+});
 console.log(notesDb)
 // adds notes to json file
 app.post("/api/notes", (req, res) => {
@@ -52,30 +52,29 @@ app.post("/api/notes", (req, res) => {
     console.log(notesDb)
 
     //writes database 
-    writeToDataBase();
+    writeToDataBase(notesDb);
 
     res.json(saveNote);
 
-})
-
-app.delete("/api/notes", (res, req) => {
-
-    notesDb.forEach((note) => {
-        if (note[i].id == req.params.id) {
-            notesDb.splice(i, 1);
-            break;
-        }
-    });
-
-    writeToDataBase(notesDb)
-
-    res.json(notesDb)
 });
+
+// app.delete("/api/notes", (res, req) => {
+
+//     notesDb.forEach((note) => {
+//         if (note[i].id == req.params.id) {
+//             notesDb.splice(i, 1);
+//         }
+//     });
+
+//     writeToDataBase(notesDb)
+
+//     res.json(notesDb)
+// });
 
 // runs the server
 app.listen(PORT, () => {
     console.log(`API server now on ${PORT}!`)
-})
+});
 
 //write to database function 
 const writeToDataBase = (notesDb) => {
@@ -87,4 +86,4 @@ const writeToDataBase = (notesDb) => {
             console.log("notes added!")
         }
     })
-}
+};
