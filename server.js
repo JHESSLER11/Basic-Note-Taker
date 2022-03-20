@@ -2,7 +2,7 @@ const express = require('express');
 const app = express()
 const path = require('path');
 const db = require('./db/db.json')
-const notes = require('./public/notes.html')
+
 
 const PORT = process.env.PORT || 3001;
 
