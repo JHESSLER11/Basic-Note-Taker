@@ -31,9 +31,11 @@ app.get('*', (req, res) => {
 });
 
 // get notes
-app.get('/api/notes', (req, res) => {
+app.get("/api/notes", (req, res) => {
     res.json(notesDb);
+    console.log(notesDb + 'hello')
 });
+
 console.log(notesDb)
 // adds notes to json file
 app.post("/api/notes", (req, res) => {
