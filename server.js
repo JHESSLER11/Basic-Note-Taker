@@ -4,6 +4,8 @@ const app = express();
 const path = require('path');
 const notesDb = require("./db/db.json")
 
+console.log(notesDb)
+
 const PORT = process.env.PORT || 3001;
 
 // handles post request 
@@ -27,16 +29,21 @@ app.get('*', (req, res) => {
 
 // get notes
 app.get('/api/notes', (req, res) => {
-    res.sendFile(path.json(__dirname, './db/db.json'));
+    res.json(notesDb)
 })
-
+console.log(notesDb)
 // adds notes to json file
 app.post('/api/notes', (req, res) => {
+
+    notesDb = JSON.parse(notesDb)
     req.body.id = notesDb.length;
 
     notesDb.push(req.body);
+    notesDb = JSON.stringify(notesDb);
+    console.log(notesDb)
+    writeToFile(notesDb);
 
-    writeToFile();
+    res.json(req.body)
 
 })
 
@@ -47,7 +54,7 @@ app.listen(PORT, () => {
 
 // write to file function 
 const writeToFile = (notesDb) => {
-    fs.writeFile('./db/db.json', JSON.stringify(notesDb), error => {
+    fs.writeFile('./db/db.json', notesDb, error => {
         if (error) {
             return console.log(error);
         } else {
