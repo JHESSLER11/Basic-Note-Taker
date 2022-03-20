@@ -30,7 +30,23 @@ app.get('/api/notes', (req, res) => {
     res.json(notesDb);
 })
 
+// add notes to page
+app.post('/api/notes', (req, res) => {
+    let note = req.body
+})
+
 // runs the server
 app.listen(PORT, () => {
     console.log(`API server now on ${PORT}!`)
 })
+
+// write to file function 
+const writeToFile = () => {
+    fs.writeFile(notesDb, error => {
+        if (error) {
+            return console.log(error);
+        } else {
+            console.log("notes added!")
+        }
+    })
+}
