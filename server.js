@@ -27,12 +27,17 @@ app.get('*', (req, res) => {
 
 // get notes
 app.get('/api/notes', (req, res) => {
-    res.json(notesDb);
+    res.sendFile(path.json(__dirname, './db/db.json'));
 })
 
-// add notes to page
+// adds notes to json file
 app.post('/api/notes', (req, res) => {
-    let note = req.body
+    req.body.id = notesDb.length;
+
+    notesDb.push(req.body);
+
+    writeToFile();
+
 })
 
 // runs the server
@@ -41,8 +46,8 @@ app.listen(PORT, () => {
 })
 
 // write to file function 
-const writeToFile = () => {
-    fs.writeFile(notesDb, error => {
+const writeToFile = (notesDb) => {
+    fs.writeFile('./db/db.json', JSON.stringify(notesDb), error => {
         if (error) {
             return console.log(error);
         } else {
