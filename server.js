@@ -58,6 +58,20 @@ app.post("/api/notes", (req, res) => {
 
 })
 
+app.delete("/api/notes", (res, req) => {
+
+    notesDb.forEach((note) => {
+        if (note[i].id == req.params.id) {
+            notesDb.splice(i, 1);
+            break;
+        }
+    });
+
+    writeToDataBase(notesDb)
+
+    res.json(notesDb)
+});
+
 // runs the server
 app.listen(PORT, () => {
     console.log(`API server now on ${PORT}!`)
