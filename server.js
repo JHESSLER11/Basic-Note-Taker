@@ -34,13 +34,18 @@ app.get('/api/notes', (req, res) => {
 console.log(notesDb)
 // adds notes to json file
 app.post('/api/notes', (req, res) => {
+    console.log(notesDb)
+    //notesDb = JSON.parse(notesDb);
 
-    notesDb = JSON.parse(notesDb)
-    req.body.id = notesDb.length;
+    // adds id number
+    req.body.id = JSON.stringify(notesDb[notesDb.length -1].id + 1);
 
     notesDb.push(req.body);
-    notesDb = JSON.stringify(notesDb);
+    
     console.log(notesDb)
+    
+    
+    //notesDb = JSON.stringify(notesDb);
     writeToFile(notesDb);
 
     res.json(req.body)
@@ -54,7 +59,7 @@ app.listen(PORT, () => {
 
 // write to file function 
 const writeToFile = (notesDb) => {
-    fs.writeFile('./db/db.json', notesDb, error => {
+    fs.writeFile('./db/db.json', notesDb = JSON.stringify(notesDb), error => {
         if (error) {
             return console.log(error);
         } else {
