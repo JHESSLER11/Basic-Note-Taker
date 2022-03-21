@@ -61,11 +61,15 @@ app.post("/api/notes", (req, res) => {
 
 });
 
-app.delete("/api/notes", (res, req) => {
+app.delete("/api/notes:id", (res, req) => {
 
     for (let index = 0; index < notesDb.length; index++) {
        
-        let notes = notesDb
+        let notes = notesDb[1];
+        
+        if (notes[i].id === req.params.id) {
+            notesDb.slice([i],1);
+        }
         
     }
     // notesDb.forEach((note) => {
