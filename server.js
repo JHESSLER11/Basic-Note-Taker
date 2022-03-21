@@ -61,18 +61,24 @@ app.post("/api/notes", (req, res) => {
 
 });
 
-// app.delete("/api/notes", (res, req) => {
+app.delete("/api/notes", (res, req) => {
 
-//     notesDb.forEach((note) => {
-//         if (note[i].id == req.params.id) {
-//             notesDb.splice(i, 1);
-//         }
-//     });
+    for (let index = 0; index < notesDb.length; index++) {
+       
+        let notes = notesDb
+        
+    }
+    // notesDb.forEach((note) => {
+    //     console.log(note + 'hello2')
+    //     if (note.id == req.params.id) {
+    //         notesDb.splice(1);
+    //     }
+    // });
 
-//     writeToDataBase(notesDb)
+    writeToDataBase(notesDb)
 
-//     res.json(notesDb)
-// });
+    res.json(notesDb)
+});
 
 // runs the server
 app.listen(PORT, () => {
