@@ -15,6 +15,12 @@ app.use(express.urlencoded( { extended: true }));
 // handles in coming js,css, and images
 app.use(express.static('public'));
 
+// get notes
+app.get("/api/notes", (req, res) => {
+    res.json(notesDb);
+    console.log(notesDb + 'hello')
+});
+
 // get index.html file
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'))
@@ -30,11 +36,6 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'))
 });
 
-// get notes
-app.get("/api/notes", (req, res) => {
-    res.json(notesDb);
-    console.log(notesDb + 'hello')
-});
 
 console.log(notesDb)
 // adds notes to json file
