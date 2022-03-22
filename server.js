@@ -61,17 +61,31 @@ app.post("/api/notes", (req, res) => {
 
 });
 
-app.delete("/api/notes:id", (res, req) => {
+//delete note still a work in progress
+app.delete("/api/notes/:id", (res, req) => {
 
-    for (let index = 0; index < notesDb.length; index++) {
-       
-        let notes = notesDb[1];
-        
-        if (notes[i].id === req.params.id) {
-            notesDb.slice([i],1);
+    //let deleteNote = req.params.id
+    //console.log(deleteNote)
+
+    
+    //let notes = notesDb[1];
+    fs.readFile("./db/db.json", (err, data) => {
+
+        notesDb = JSON.parse(data);
+
+        for (let i = 0; i < notesDb.length; i++) {
+
+        if (notesDb[i].id === req.params.id) {
+            notesDb.slice([i], 1);
+
+            }
         }
         
-    }
+        writeToDataBase(notesDb)
+        
+    })
+    //res.json(notesDb)
+});
     // notesDb.forEach((note) => {
     //     console.log(note + 'hello2')
     //     if (note.id == req.params.id) {
@@ -79,10 +93,8 @@ app.delete("/api/notes:id", (res, req) => {
     //     }
     // });
 
-    writeToDataBase(notesDb)
 
-    res.json(notesDb)
-});
+
 
 // runs the server
 app.listen(PORT, () => {
