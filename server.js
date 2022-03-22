@@ -5,7 +5,6 @@ const path = require('path');
 const notesDb = require("./db/db.json");
 const PORT = process.env.PORT || 3001;
 
-console.log(notesDb)
 
 
 // handles post request 
@@ -18,7 +17,6 @@ app.use(express.static('public'));
 // get notes
 app.get("/api/notes", (req, res) => {
     res.json(notesDb);
-    console.log(notesDb + 'hello')
 });
 
 // get index.html file
@@ -37,7 +35,6 @@ app.get('*', (req, res) => {
 });
 
 
-console.log(notesDb)
 // adds notes to json file
 app.post("/api/notes", (req, res) => {
     
@@ -71,17 +68,17 @@ app.delete("/api/notes/:id", (res, req) => {
     //let notes = notesDb[1];
     fs.readFile("./db/db.json", (err, data) => {
 
-        notesDb = JSON.parse(data);
+        notesDelete = JSON.parse(data);
 
-        for (let i = 0; i < notesDb.length; i++) {
+        for (let i = 0; i < notesDelete.length; i++) {
 
-        if (notesDb[i].id === req.params.id) {
-            notesDb.slice([i], 1);
+        if (notesDelete[i].id === req.params.id) {
+            notesDelete.slice([i], 1);
 
             }
         }
         
-        writeToDataBase(notesDb)
+        writeToDataBase(notesDelete)
         
     })
     //res.json(notesDb)
