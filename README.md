@@ -18,7 +18,7 @@
   and npm i, npm i express
 
   ## Instructions of use
-  Project can be used by anyone looking to build a team in html.
+  Project can be used by anyone who needs to take and recall notes
 
   ## License
   MIT
@@ -33,11 +33,9 @@
   ## live server
   Click [Here!](https://hess-note-taker.herokuapp.com/) to go to my deloyed application on heroku!
   
-  ## Screen Shot of questions and answers
-  ![Alt text]
+  ## Screen Shot of notes added
+  ![Alt text](https://github.com/JHESSLER11/Basic-Note-Taker/blob/main/assets/images/showing%20data.png)
   
-  ## Screen shot of Passed Test
-  ![Alt text]
+  ## Screen shot of note being recalled
+  ![Alt text](https://github.com/JHESSLER11/Basic-Note-Taker/blob/main/assets/images/recall%20data%20.png)  
   
-  ## Screen shot of deployed application
-  ![Alt text]
